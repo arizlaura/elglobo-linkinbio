@@ -12,7 +12,7 @@ import { useState } from "react";
 const HERO_BG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663761115795/SxuqTGVq6HpEwXWokZ5jWB/elglobo-hero-bg-N9HahDHBwSzAAuXtAPij9G.webp";
 const LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663761115795/SxuqTGVq6HpEwXWokZ5jWB/elglobo-logo-globe-dZkNoguVJERnnmw6UU4Jbw.webp";
+  "/logo.jpeg";
 const BAIRES_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663761115795/SxuqTGVq6HpEwXWokZ5jWB/elglobo-baires-card-2Jr4BSdR36w9HQiPEf8dZP.webp";
 const BRC_IMG =
