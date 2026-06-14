@@ -1,0 +1,223 @@
+/* ============================================================
+   El Globo — Link-in-Bio
+   Design: "Globo de Colores" — Neo-Playful Branding
+   Signature color: violet oklch(0.42 0.18 295)
+   Fonts: Fredoka (display) + DM Sans (body)
+   ============================================================ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand custom colors */
+  --color-brand-violet: oklch(0.42 0.18 295);
+  --color-brand-violet-light: oklch(0.62 0.14 295);
+  --color-brand-violet-pale: oklch(0.92 0.05 295);
+  --color-brand-orange: oklch(0.72 0.18 50);
+  --color-brand-orange-light: oklch(0.88 0.12 55);
+  --color-brand-green: oklch(0.52 0.12 165);
+  --color-brand-green-light: oklch(0.82 0.08 165);
+  --color-brand-yellow: oklch(0.88 0.15 90);
+  --color-brand-cream: oklch(0.97 0.02 85);
+
+  /* Easing */
+  --ease-out-snappy: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-smooth: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.97 0.02 85);
+  --foreground: oklch(0.22 0.04 295);
+  --card: oklch(1 0 0 / 85%);
+  --card-foreground: oklch(0.22 0.04 295);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.04 295);
+  --primary: oklch(0.42 0.18 295);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.92 0.05 295);
+  --secondary-foreground: oklch(0.42 0.18 295);
+  --muted: oklch(0.93 0.02 85);
+  --muted-foreground: oklch(0.55 0.05 295);
+  --accent: oklch(0.72 0.18 50);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.88 0.04 295);
+  --input: oklch(0.88 0.04 295);
+  --ring: oklch(0.62 0.14 295);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  a[href],
+  select:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 480px;
+    }
+  }
+}
+
+/* =====================
+   Custom Animations
+   ===================== */
+
+@keyframes float-globe {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-float-globe {
+  animation: float-globe 3.5s ease-in-out infinite;
+}
+
+.animate-fade-slide-up {
+  animation: fade-slide-up 0.35s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* Stagger delays */
+.delay-0 { animation-delay: 0ms; }
+.delay-80 { animation-delay: 80ms; }
+.delay-160 { animation-delay: 160ms; }
+.delay-240 { animation-delay: 240ms; }
+.delay-320 { animation-delay: 320ms; }
+
+/* Link button hover/active */
+.link-btn {
+  transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1),
+              background-color 180ms ease;
+}
+.link-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+.link-btn:active {
+  transform: scale(0.96);
+}
+
+/* City card hover */
+.city-card {
+  transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.city-card:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+.city-card:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-globe,
+  .animate-fade-slide-up,
+  .animate-scale-in,
+  .animate-pulse-soft {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
