@@ -17,9 +17,10 @@ const BAIRES_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663761115795/SxuqTGVq6HpEwXWokZ5jWB/elglobo-baires-card-2Jr4BSdR36w9HQiPEf8dZP.webp";
 const BRC_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663761115795/SxuqTGVq6HpEwXWokZ5jWB/elglobo-brc-card-HcPuUEkpTNETevmvvrM2EK.webp";
+const REMOTE_IMG = "/remote.png";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-type City = "baires" | "brc";
+type City = "baires" | "brc" | "remoto";
 
 const cities = {
   baires: {
@@ -94,6 +95,35 @@ const cities = {
       sublabel: "Seguinos para enterarte primero",
     },
   },
+  remote: {
+  label: "Online",
+  emoji: "💻",
+  tagline: "Clases de inglés en vivo",
+  accentColor: "oklch(0.42 0.18 295)",
+  accentLight: "oklch(0.92 0.05 295)",
+  accentDark: "oklch(0.32 0.15 295)",
+  image: REMOTE_IMG,
+  links: [
+    {
+      id: "wa",
+      icon: WhatsAppIcon,
+      label: "Consultanos por WhatsApp",
+      sublabel: "Clases online para adultos",
+      href: "https://wa.me/5491161203643",
+      bg: "oklch(0.42 0.18 295)",
+      fg: "#fff",
+    },
+    {
+      id: "ig",
+      icon: InstagramIcon,
+      label: "Seguinos en Instagram",
+      sublabel: "@elglobo.teatroeingles",
+      href: "https://www.instagram.com/elglobo.teatroeingles",
+      bg: "oklch(0.42 0.18 295)",
+      fg: "#fff",
+    },
+  ],
+},
 };
 
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
@@ -231,7 +261,9 @@ function CityCard({ city, data, onSelect, delay = 0 }: CityCardProps) {
   return (
     <button
       onClick={() => onSelect(city)}
-      className="city-card animate-scale-in relative overflow-hidden rounded-3xl shadow-lg w-full aspect-[3/4] focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2"
+      className={`city-card animate-scale-in relative overflow-hidden rounded-3xl shadow-lg w-full aspect-[3/4] ${
+        city === "remoto" ? "border-[8px]" : "border-4"
+      } border-white`} 
       style={{
         animationDelay: `${delay}ms`,
         opacity: 0,
@@ -252,20 +284,16 @@ function CityCard({ city, data, onSelect, delay = 0 }: CityCardProps) {
         }}
       />
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-left">
-        <p className="text-3xl mb-1">{data.emoji}</p>
-        <h2
-          className="text-2xl font-bold leading-tight drop-shadow-sm"
-          style={{ fontFamily: "'Fredoka', sans-serif" }}
-        >
-          {data.label}
-        </h2>
-        <p className="text-sm opacity-90 mt-0.5 drop-shadow-sm">{data.tagline}</p>
+      <div className="absolute inset-0 flex items-center justify-center p-5">
+                
         <div
           className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold px-3 py-1.5 rounded-full"
-          style={{ backgroundColor: "rgba(255,255,255,0.22)", backdropFilter: "blur(8px)" }}
+          style={{
+            backgroundColor: "rgba(255,255,255,0.22)", 
+            backdropFilter: "blur(8px)" 
+          }}
         >
-          Ver links
+          {data.label}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
@@ -314,8 +342,11 @@ function CityLinks({ city, onBack }: CityLinksProps) {
         <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
           <p className="text-2xl mb-0.5">{data.emoji}</p>
           <h2
-            className="text-2xl font-bold leading-tight drop-shadow-sm"
-            style={{ fontFamily: "'Fredoka', sans-serif" }}
+            className="text-lg font-bold"
+            style={{
+              fontFamily: "'Fredoka', sans-serif",
+              opacity: 0.85
+            }}
           >
             {data.label}
           </h2>
@@ -379,40 +410,43 @@ export default function Home() {
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
 
   return (
-    <div
+   <div
       className="min-h-screen w-full flex flex-col items-center"
       style={{
-        backgroundImage: `url(${HERO_BG})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundImage:
+          "url('/Fondo_acuarela.jpg'), linear-gradient(180deg, #F8F3FF 0%, #FFFFFF 100%)",
+        backgroundSize: "cover, cover",
+        backgroundPosition: "center, center",
+        backgroundRepeat: "no-repeat, no-repeat",
         backgroundAttachment: "fixed",
       }}
     >
-      {/* Frosted overlay */}
       <div
         className="min-h-screen w-full flex flex-col items-center"
-        style={{ backgroundColor: "oklch(0.97 0.02 85 / 0.72)" }}
-      >
-        <div className="w-full max-w-md px-5 py-8 flex flex-col items-center">
+        style={{
+          backgroundColor: "rgba(255,255,255,0.15)"
+        }}
+  >
+      <div className="w-full max-w-5xl px-5 py-8 flex flex-col items-center">
 
           {/* ── Header ── */}
           <div className="flex flex-col items-center mb-8 animate-fade-slide-up" style={{ opacity: 0 }}>
-            <div className="animate-float-globe mb-3">
+            <div className="mb-8">
               <img
                 src={LOGO}
                 alt="El Globo logo"
-                className="w-20 h-20 object-contain drop-shadow-lg"
+                className="w-32 h-32 rounded-full object-cover shadow-xl mx-auto"
               />
             </div>
             <h1
               className="text-4xl font-bold text-center leading-tight"
-              style={{ color: "oklch(0.42 0.18 295)", fontFamily: "'Fredoka', sans-serif" }}
+              style={{ color: "#6B21A8", fontFamily: "'Fredoka', sans-serif" }}
             >
               El Globo
             </h1>
             <p
               className="text-base text-center mt-1 font-medium"
-              style={{ color: "oklch(0.42 0.18 295 / 0.75)", fontFamily: "'DM Sans', sans-serif" }}
+              style={{ color: "#8B5FBF", fontFamily: "'DM Sans', sans-serif" }}
             >
               Teatro e Inglés para niños
             </p>
@@ -420,7 +454,7 @@ export default function Home() {
               className="mt-3 px-4 py-1.5 rounded-full text-sm font-semibold"
               style={{
                 backgroundColor: "oklch(0.42 0.18 295 / 0.12)",
-                color: "oklch(0.42 0.18 295)",
+                color: "#8B5FBF",
               }}
             >
               🌎 Jugando, creando y compartiendo
@@ -432,13 +466,37 @@ export default function Home() {
             <div className="w-full">
               <p
                 className="text-center text-sm font-semibold mb-4 animate-fade-slide-up delay-80"
-                style={{ color: "oklch(0.42 0.18 295 / 0.65)", opacity: 0 }}
+                style={{ color: "#8B5FBF", opacity: 0 }}
               >
-                Elegí tu ciudad
+                Encontrá tu espacio
               </p>
-              <div className="grid grid-cols-2 gap-4">
-                <CityCard city="baires" data={cities.baires} onSelect={setSelectedCity} delay={100} />
-                <CityCard city="brc" data={cities.brc} onSelect={setSelectedCity} delay={180} />
+              <div className="flex justify-center gap-4 flex-wrap">
+                <div className="w-40">
+                  <CityCard
+                    city="baires"
+                    data={cities.baires}
+                    onSelect={setSelectedCity}
+                    delay={100}
+                  />
+                </div>
+
+                <div className="w-40">
+                  <CityCard
+                    city="brc"
+                    data={cities.brc}
+                    onSelect={setSelectedCity}
+                    delay={180}
+                  />
+                </div>
+
+                <div className="w-40">
+                  <CityCard
+                    city="remoto"
+                    data={cities.remote}
+                    onSelect={setSelectedCity}
+                    delay={260}
+                  />
+                </div>
               </div>
             </div>
           ) : (
@@ -448,7 +506,7 @@ export default function Home() {
           {/* ── Footer ── */}
           <p
             className="mt-10 text-xs text-center"
-            style={{ color: "oklch(0.42 0.18 295 / 0.45)" }}
+            style={{ color: "#8B5FBF" }}
           >
             © {new Date().getFullYear()} El Globo · Teatro e Inglés
           </p>
